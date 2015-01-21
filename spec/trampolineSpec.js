@@ -35,7 +35,7 @@ describe('trampoline usage', function() {
       var num = 100000;
 
       repeat(operation, num);
-      expect(operation.calls.length).toEqual(num);
+      expect(operation.calls.count()).toEqual(num);
     });
   });
 

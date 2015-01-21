@@ -72,7 +72,7 @@ describe('arrayHelpers', function() {
     });
 
     it('does not call a predicate if it is not neccessary', function() {
-      var test = jasmine.createSpy('predicate').andReturn(false);
+      var test = jasmine.createSpy('predicate').and.returnValue(false);
 
       every([1, 2, 3], test);
 
@@ -92,7 +92,7 @@ describe('arrayHelpers', function() {
     });
 
     it('does not call a predicate if it is not neccessary', function() {
-      var test = jasmine.createSpy('predicate').andReturn(true);
+      var test = jasmine.createSpy('predicate').and.returnValue(true);
 
       some([1, 2, 3], test);
 
