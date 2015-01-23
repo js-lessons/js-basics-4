@@ -1,6 +1,8 @@
 function reduce(array, f, start) {
   // The reduce function applies a function against an accumulator
   // and each value of the array (from left-to-right) has to reduce it to a single value.
+  // Here start is initial value of an accumulator. If it wasn't set then first element of the array will
+  // be used as initial value
   // You can implement map, filter, flatmap, every and some using reduce
 }
 
