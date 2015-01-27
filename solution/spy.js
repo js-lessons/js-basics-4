@@ -1,12 +1,23 @@
 var slice = Function.call.bind(Array.prototype.slice);
 
 function Spy(target, method) {
-  // Spy function takes an object and a method and starts spying on method calls.
-  // It knows how many times it was called and with what arguments.
-  // So Spy function returns an object with two methods: count and args.
-  //
-  // * count returns number of method calls
-  // * args returns an array of arrays of arguments
+  var spy = {
+    count: 0,
+    args: []
+  }
+
+  var originalMethod = '__spy_original_method_backup_of_' + method + '__';
+
+  tracer = function () {
+    spy.args.push([].slice.call(arguments));
+    spy.count = spy.args.length;
+    return target[originalMethod].apply(target, arguments);
+  }
+
+  target[originalMethod] = target[method];
+  target[method] = tracer;
+
+  return spy;
 }
 
 module.exports = Spy
