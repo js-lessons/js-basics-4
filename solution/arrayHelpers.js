@@ -4,7 +4,7 @@ function reduce(array, f, start) {
     count = 1;
   } else { count = 0; }
   for (i = count; i < array.length; i++) {
-    start = f(array[i], start);
+    start = f(start, array[i]);
   }
   return start;
 }
@@ -20,15 +20,15 @@ function reduce(array, f, start) {
 // function filter(array, f) {
 //   acc = [];
 //   for (i = 0; i < array.length; i++) {
-//     if (f(array[i]) {
-//       acc = acc.push(f(array[i]));
+//     if (f(array[i])) {
+//       acc = acc.concat([array[i]]);
 //     }
 //   }
 //   return acc;
 // }
 
 // function flatmap(array, f) {
-//   acc = []
+//   acc = [];
 //   for (i = 0; i < array.length; i++) {
 //     acc = acc.concat(f(array[i]));
 //     }
@@ -47,7 +47,6 @@ function filter(array, f) {
   }, []);
 }
 
-
 function flatmap(array, f) {
   return reduce(array, function(acc, x) {
     return acc.concat(f(x));
@@ -55,7 +54,12 @@ function flatmap(array, f) {
 }
 
 function every(array, f) {
-  // The every function tests whether all elements in the array pass the test implemented by the provided function.
+  for (i = 0; i < array.length; i++) {
+    if (!f(array[i])) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function some(array, f) {
