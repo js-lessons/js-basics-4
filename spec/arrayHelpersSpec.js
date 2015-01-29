@@ -9,9 +9,16 @@ var map = require('../solution/arrayHelpers').map,
 describe('arrayHelpers', function() {
   describe('map', function() {
     var square = function(x) { return x * x; }
+    var createDouble = function(x) {
+      return [x, x + x];
+    }
 
     it('applies function to every element in provided array', function() {
       expect(map([1, 2, 3], square)).toEqual([1, 4, 9]);
+    });
+
+    it('does not flatten', function() {
+      expect(map([1, 2, 3], createDouble)).toEqual([[1, 2], [2, 4], [3, 6]]);
     });
 
     it('works for empty array', function() {
