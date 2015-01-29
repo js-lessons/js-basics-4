@@ -63,7 +63,12 @@ function every(array, f) {
 }
 
 function some(array, f) {
-  // The some function tests whether some element in the array passes the test implemented by the provided function.
+  for (i = 0; i < array.length; i++) {
+    if (f(array[i])) {
+      return true;
+    }
+  }
+  return false;
 }
 
 module.exports = {
