@@ -28,6 +28,7 @@ describe('arrayHelpers', function() {
 
   describe('reduce', function() {
     var mult = function(a, b) { return a * b; }
+    var plus = function(a, b) { return a + b; }
 
     it('folds an array to single value by applying function to current value and accumulator', function() {
       expect(reduce([1, 2, 3, 4], mult, 1)).toEqual(24);
@@ -36,6 +37,11 @@ describe('arrayHelpers', function() {
     it('takes a value to start folding from', function() {
       expect(reduce([1, 2], mult, 3)).toEqual(6);
     });
+
+    it('maintains order of calculations', function() {
+      expect(reduce(['1', '2'], plus, '3')).toEqual('312');
+    });
+
 
     it('uses first item as a start value if it wasnt provided', function() {
       expect(reduce([2, 3, 4], mult)).toEqual(24);
