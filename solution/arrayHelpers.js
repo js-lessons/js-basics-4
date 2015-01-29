@@ -35,6 +35,14 @@ function reduce(array, f, start) {
 //   return acc;
 // }
 
+// function some(array, f) {
+//   return !every(array, function(x) { return !f(x); });
+// }
+
+// function every(array, f) {
+//   return !some(array, function(x) { return !f(x); });
+// }
+
 function map(array, f) {
   return reduce(array, function(acc, x) {
     return acc.concat([f(x)]);
