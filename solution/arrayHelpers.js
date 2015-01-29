@@ -1,6 +1,6 @@
 function reduce(array, f, start) {
   if (!array.length) return start;
-  if (typeof start === 'undefined') return reduce(array.slice(1, array.length), f, array[0]);
+  if (typeof start === 'undefined') return reduce(array.slice(1), f, array[0]);
 
   var res = start;
   array.forEach( function (item) {
