@@ -31,7 +31,7 @@ describe('arrayHelpers', function() {
     });
 
     it('uses first item as a start value if it wasnt provided', function() {
-      expect(reduce([1, 2, 3, 4], mult)).toEqual(24);
+      expect(reduce([2, 3, 4], mult)).toEqual(24);
     });
 
     it('works for empty array', function() {
