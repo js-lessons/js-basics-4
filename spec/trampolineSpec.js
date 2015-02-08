@@ -51,7 +51,7 @@ describe('trampoline usage', function() {
       expect(isEven(3)).toBeFalsy();
       expect(isEven(21)).toBeFalsy();
     });
-
+//
     it('works for negative numbers', function() {
       expect(isEven(-21)).toBeFalsy();
       expect(isEven(-42)).toBeTruthy();
