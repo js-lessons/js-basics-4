@@ -7,6 +7,15 @@ function Spy(target, method) {
   //
   // * count returns number of method calls
   // * args returns an array of arrays of arguments
+  var origFunction = target[method],
+      spier = {count : 0, args : []};
+	  
+  target[method] = function(){
+    spier.args.push(slice(arguments));
+    spier.count++;
+    return origFunction.apply(this, arguments);
+  }
+  return spier;
 }
 
 module.exports = Spy

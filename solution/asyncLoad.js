@@ -9,16 +9,14 @@ function asyncLoad(ids, load, done) {
   //
   // * loaded items should be the same order as ids
   // * load should be performed in parallel
-  console.log(ids);
   var res = ids.reduce(function(map, el){ map[el] = null; return map;}, {});
   ids.forEach(function(id){load(id, function(result){
-	  res[id] = result;
-	  if (allLoaded(res))
-		  {
-			  var loaded = ids.map(function(id){ return res[id];});
-			  done(loaded);
-		  }
-	  })});
+    res[id] = result;
+    if (allLoaded(res)){
+      var loaded = ids.map(function(id){ return res[id];});
+      done(loaded);
+    }
+  })});
 }
 
 function allLoaded(obj){
