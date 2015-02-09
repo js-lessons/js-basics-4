@@ -9,6 +9,18 @@ function asyncLoad(ids, load, done) {
   //
   // * loaded items should be the same order as ids
   // * load should be performed in parallel
+  var res = ids.reduce(function(map, el){ map[el] = null; return map;}, {});
+  ids.forEach(function(id){load(id, function(result){
+    res[id] = result;
+    if (allLoaded(res)){
+      var loaded = ids.map(function(id){ return res[id];});
+      done(loaded);
+    }
+  })});
+}
+
+function allLoaded(obj){
+  return Object.keys(obj).every(function(prop){ return (obj[prop] !== null)});
 }
 
 module.exports = asyncLoad;
