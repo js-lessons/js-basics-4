@@ -1,15 +1,17 @@
 function reduce(array, f, start) {
-  // The reduce function applies a function against an accumulator
-  // and each value of the array (from left-to-right) has to reduce it to a single value.
-  // Here start is initial value of an accumulator. If it wasn't set then first element of the array will
-  // be used as initial value, but the array should be iterated from the second element.
-  // You can implement map, filter, flatmap, every and some using reduce
+  if(typeof start=== 'undefined'){start = array[0]}
+  for (var i = start; i < array.length; i++){
+    result = f(result, array[i]);
+  }
 }
 
 function map(array, f) {
-  // The map function transforms an array by applying a function to all of its elements
-  // and building a new array from the returned values. The new array will have
-  // the same length as the input array, but its content will have been "mapped" to a new form by the function.
+  ar.forEach(
+    function(element, index){
+        ar[index] = element*3;
+    }
+  );
+  return ar;    
 }
 
 function filter(array, f) {
