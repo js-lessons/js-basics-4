@@ -1,35 +1,57 @@
 function reduce(array, f, start) {
-  if(typeof start=== 'undefined'){start = array[0]}
-  for (var i = start; i < array.length; i++){
-    result = f(result, array[i]);
-  }
+	var result = (start == undefined) ? array[0] : start;
+	for (var i = (start == undefined) ? 1 : 0; i < array.length; i++){
+		result = f(result, array[i]);
+	}
+	return result;
 }
 
 function map(array, f) {
-  ar.forEach(
+  array.forEach(
     function(element, index){
-        ar[index] = element*3;
+        array[index] = f(element);
     }
   );
-  return ar;    
+  return array;    
 }
 
 function filter(array, f) {
-  // The filter function creates a new array with all elements
-  // that pass the test implemented by the provided function.
+	var new_array = [];
+	if(array.length == 0){
+		return new_array;
+	}else{
+		for(i=0; i<array.length; i++){
+			if(f(array[i])){
+				new_array.push(array[i]);
+			}			
+		}	
+		return new_array;
+	}
 }
 
 function flatmap(array, f) {
-  // Use the reduce method in combination with the concat method to "flatten"
-  // an array of arrays into a single array that has all the elements of the input arrays.
+	var result = reduce(array, function(arr, x) {
+		return arr.concat(f(x));
+	}, []);
+    return result;
 }
 
 function every(array, f) {
-  // The every function tests whether all elements in the array pass the test implemented by the provided function.
+	for(i=0;i<array.length;i++){
+		if(!f(array[i])){
+			return false;
+		}
+	}
+	return true;
 }
 
 function some(array, f) {
-  // The some function tests whether some element in the array passes the test implemented by the provided function.
+	for(i=0;i<array.length;i++){
+		if(f(array[i])){
+			return true;
+		}
+	}
+	return false;
 }
 
 module.exports = {
