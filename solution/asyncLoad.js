@@ -14,16 +14,19 @@ function asyncLoad(ids, load, done) {
     var loadingState = [];
     var loadingItem = [];
     ids.forEach(function (id, index) {
+//        console.log(id);
         loadingState[index] = false;
         load(id, function (elem) {
+//            console.log(id);
             loadingState[index] = true;
-            loadingItem.push(elem);
+            loadingItem[id] = elem;
+
             for (var i = 0; i < loadingState.length; i += 1) {
                 if (!loadingState[i]) {
                     return;
                 }
             }
-            loadingItem.sort(function(a,b){return loadingItem[a].id - loadingItem[b].id});
+//            loadingItem.sort(function(a,b){return loadingItem[a].id - loadingItem[b].id});
             done(loadingItem);
         });
     });
