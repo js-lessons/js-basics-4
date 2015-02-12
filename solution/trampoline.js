@@ -11,7 +11,6 @@ function trampoline(fn) {
   while (fn && fn instanceof Function) {
     fn = fn.apply(fn.context, fn.args);
   }
-
   return fn;
 }
 
@@ -29,6 +28,16 @@ function repeat(operation, num) {
   // Write a function that performs operation provided number of times.
   // Do not use any kind of loop operator in your implementation.
   // To prevent stack overflow you can use trampoline function.
+
+    function _start(operation, num){
+        if(num === 0){
+            return 0;
+        }else{
+            operation();
+           return _start.bind(null, operation, num-1);
+        }
+    }
+    return trampoline( _start.bind(null, operation, num));
 }
 
 function isEven(number) {
@@ -38,7 +47,25 @@ function isEven(number) {
   //
   // • Zero is even.
   // • One is odd.
+    function _isInner(number){
 
+        if(number !== 1 && number !== 0)
+        {
+            if(number < 0){
+                return _isInner.bind(null, number-2*(-1));
+            }else{
+                return _isInner.bind(null, number-2);
+            }
+
+        }else{
+            if(number === 0){
+                return true;
+            }else if(number === 1){
+                return false;
+            }
+        }
+    }
+    return trampoline(_isInner.bind(null, number))
   // For any other number N, its evenness is the same as N - 2.
   // Define a recursive function isEven corresponding to this description. The function should accept a number parameter and return a Boolean.
   // Test it on 50 and 75. See how it behaves on -1. Why? Can you think of a way to fix this?
