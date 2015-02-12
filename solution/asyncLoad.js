@@ -14,12 +14,12 @@ function asyncLoad(ids, load, done) {
     var loadingState = [];
     var loadingItem = [];
     ids.forEach(function (id, index) {
-//        console.log(id);
+//        console.log(index);
         loadingState[index] = false;
         load(id, function (elem) {
-//            console.log(id);
+//            console.log(id +""+ index);
             loadingState[index] = true;
-            loadingItem[id] = elem;
+            loadingItem[index] = elem;
 
             for (var i = 0; i < loadingState.length; i += 1) {
                 if (!loadingState[i]) {
