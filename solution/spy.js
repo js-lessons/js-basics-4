@@ -11,7 +11,7 @@ function Spy(target, method) {
     var arr = {count: 0, args:[]};
     var old = target[method];
     target[method] = function(){
-        debugger
+//        debugger
         array = [];
         arr.count++;
         for(var i = 0; i<arguments.length; i++){
