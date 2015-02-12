@@ -14,10 +14,8 @@ function asyncLoad(ids, load, done) {
     var loadingState = [];
     var loadingItem = [];
     ids.forEach(function (id, index) {
-//        console.log(index);
         loadingState[index] = false;
         load(id, function (elem) {
-//            console.log(id +""+ index);
             loadingState[index] = true;
             loadingItem[index] = elem;
 
@@ -26,7 +24,6 @@ function asyncLoad(ids, load, done) {
                     return;
                 }
             }
-//            loadingItem.sort(function(a,b){return loadingItem[a].id - loadingItem[b].id});
             done(loadingItem);
         });
     });

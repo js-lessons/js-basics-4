@@ -58,7 +58,7 @@ function flatmap(array, f) {
     for (var i = 0; i < array.length; i++) {
             arr.push(f(array[i]));
     }
-    return [].reduce.call(arr, function(a,b){
+    return arr.reduce(function(a,b){
         return a.concat(b);
     })
 }
