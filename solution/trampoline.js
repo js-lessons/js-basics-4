@@ -24,11 +24,25 @@ function factorial(n) {
 
   return trampoline(_factorial.bind(null, 1, n));
 }
-
+var count = 0;
+function operation() { 
+  count++ ;
+  }
 function repeat(operation, num) {
   // Write a function that performs operation provided number of times.
   // Do not use any kind of loop operator in your implementation.
   // To prevent stack overflow you can use trampoline function.
+
+ function recur_Repeat(operation, num){
+    if(num>0){
+     num--;
+     operation();
+    }else{
+	  return count;
+	}
+   return recur_Repeat.bind(null, operation, num);
+ }
+return trampoline(recur_Repeat.bind(null, operation, num));
 }
 
 function isEven(number) {
@@ -43,6 +57,19 @@ function isEven(number) {
   // Define a recursive function isEven corresponding to this description. The function should accept a number parameter and return a Boolean.
   // Test it on 50 and 75. See how it behaves on -1. Why? Can you think of a way to fix this?
   // To prevent stack overflow you can use trampoline function.
+ function recur_IsEven (number){
+   if(number<0){
+    number=-number;
+   }
+  if (number ===0){
+   return true;
+  }
+  if (number ===1){
+   return false;
+  }
+ return recur_IsEven.bind(null,number-2);
+ }
+return trampoline(recur_IsEven.bind(null,number));
 }
 
 module.exports = {
