@@ -18,8 +18,8 @@ function trampoline(fn) {
 function factorial(n) {
   // Trampoline usage example
 
-  function _factorial(acc, n) {
-    return n ? _factorial.bind(null, acc * n, --n) : acc;
+  function _factorial(access, n) {
+    return n ? _factorial.bind(null, access* n, --n) : access;
   }
 
   return trampoline(_factorial.bind(null, 1, n));
@@ -29,7 +29,14 @@ function repeat(operation, num) {
   // Write a function that performs operation provided number of times.
   // Do not use any kind of loop operator in your implementation.
   // To prevent stack overflow you can use trampoline function.
+  if (num>=1) {
+     operation();
+      return repeat.bind(null, operation, num-1);
+    }
+  
+  return trampoline(repeat.bind(null, operation, num));
 }
+
 
 function isEven(number) {
   // % (the remainder operator) can be used to test whether a number is even
