@@ -7,24 +7,26 @@ function Spy(target, method) {
   //
   // * count returns number of method calls
   // * args returns an array of arrays of arguments
-   function decorator(){
+    function decorator(){
          target["decorator"] = target[method];
         target[method] = function(){
-            spy.count++;
-            var argsAsArr = [];
+            spyObj.count++;
+            if(arguments.length>0){
+			var argsAsArr = [];
             for(var i=0; i<arguments.length; i++) {
                 argsAsArr[i] = arguments[i];
             }
-            spy.args.push(argsAsArr);
+            spyObj.args.push(argsAsArr);}
             return target["decorator"].apply(target,arguments);
         }
-
-        var spy = {
+}
+	decorator();
+	
+	var spyObj = {
                 count: 0,
                 args: []
                 };
-        return spy;
-
-    }
+        return spyObj;
 }
+
 module.exports = Spy
