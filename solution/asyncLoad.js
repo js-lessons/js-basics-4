@@ -9,6 +9,19 @@ function asyncLoad(ids, load, done) {
   //
   // * loaded items should be the same order as ids
   // * load should be performed in parallel
+ //console.log(ids);
+ 
+  var count = 0;
+  var users = [];
+  ids.forEach(function(id, index) {
+    load(id, function(user) {
+      users[index] = user;
+	  count++;
+      if (count === ids.length){
+	   return done(users);
+	  }
+    });
+  });
 }
 
 module.exports = asyncLoad;
