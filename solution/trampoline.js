@@ -26,12 +26,30 @@ function factorial(n) {
 }
 
 function repeat(operation, num) {
+  function _repeat(operation, num) {
+    if (num < 1) return false;
+    operation();
+    return _repeat.bind(null, operation, --num);
+  }
+  return trampoline(_repeat.bind(null, operation, num));
   // Write a function that performs operation provided number of times.
   // Do not use any kind of loop operator in your implementation.
-  // To prevent stack overflow you can use trampoline function.
+  // To prevent stack overflow you can use trampoline function.  
 }
 
 function isEven(number) {
+
+    function _isEven(number) {
+    if (number < 1) {number = number*(-1)};
+    if(number == 0){
+      return true;
+    }else if(number == 1){
+      return false;
+    }else{
+      return _isEven.bind(null, number-2);
+    }
+  }
+  return trampoline(_isEven.bind(null,number));
   // % (the remainder operator) can be used to test whether a number is even
   // or odd by using % 2 to check whether it’s divisible by two. Here’s another way to define
   // whether a positive whole number is even or odd:
