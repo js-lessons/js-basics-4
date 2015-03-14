@@ -4,17 +4,12 @@ function reduce(array, f, start) {
   // Here start is initial value of an accumulator. If it wasn't set then first element of the array will
   // be used as initial value, but the array should be iterated from the second element.
   // You can implement map, filter, flatmap, every and some using reduce
-  var reducedValue, startFrom;
-  if (!start) {
-    reducedValue = array[0];
-    startFrom = 1;
-  } else {
-    reducedValue=start;
-    startFrom=0;
+  
+  var reducedValue;
+  (!start) ? reducedValue=array.shift() : reducedValue=start;
+  for (var i=0; i<array.length; i++) {
+    reducedValue = f(reducedValue, array[i]);
   }
-  for (var i=startFrom; i<array.length; i++) {
-       reducedValue = f(reducedValue, array[i]);
-    }
   return reducedValue;
 }
 
@@ -22,35 +17,31 @@ function map(array, f) {
   // The map function transforms an array by applying a function to all of its elements
   // and building a new array from the returned values. The new array will have
   // the same length as the input array, but its content will have been "mapped" to a new form by the function.
-  mappedArray = [];
-  for (var i=0; i<array.length; i++) {
-    mappedArray.push(f(array[i]));
-  }
-  return mappedArray;
+
+  return reduce(array, function(arr, i) {
+    arr.push(f(i));
+    return arr;
+  }, []);
+
 }
 
 function filter(array, f) {
   // The filter function creates a new array with all elements
   // that pass the test implemented by the provided function.
-  var filteredArray = [];
-  for (var i=0; i<array.length; i++) {
-    if (f(array[i])) {
-      filteredArray.push(array[i]);
-    }
-  }
-  return filteredArray;
+
+  return reduce(array, function(arr, i) {
+    if(f(i)) {arr.push(i);}
+    return arr;
+  }, []);
 }
 
 function flatmap(array, f) {
   // Use the reduce method in combination with the concat method to "flatten"
   // an array of arrays into a single array that has all the elements of the input arrays.
-  var changedArray = [];
-  for (var i=0; i<array.length; i++) {
-    changedArray.push(f(array[i]));
-  }
-  return reduce(changedArray, function(a,b) {
-    return a.concat(b);
-  }, 0);
+  
+  return reduce(array, function(arr, i) {
+    return arr.concat(f(i));
+  }, []);
 }
 
 function every(array, f) {
